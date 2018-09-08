@@ -1,9 +1,18 @@
 {
     "name": "vscode-clipboard-with-formatter",
-    "displayName": "vscode-clipboard-with-formatter",
+    "displayName": "clipboard with formatter",
     "description": "Optimize your copy and paste.Keep a history of your copied items and re-paste if needed, at the same time, it can format your code segment.",
     "version": "0.0.1",
     "publisher": "yexiaosong",
+    "icon": "imgs/logo.png",
+    "bugs": {
+        "url": "https://github.com/yexiaosong/vscode-clipboard-with-formatter/issues"
+    },
+    "homepage": "https://github.com/yexiaosong/vscode-clipboard-with-formatter/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yexiaosong/vscode-clipboard-with-formatter/"
+    },
     "engines": {
         "vscode": "^1.27.0"
     },
@@ -11,14 +20,44 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:extension.copy",
+        "onCommand:extension.cut",
+        "onCommand:extension.paste"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "extension.copy",
+                "title": "Copy to Clipboard"
+            },
+            {
+                "command": "extension.cut",
+                "title": "Cut to Clipboard"
+            },
+            {
+                "command": "extension.paste",
+                "title": "Paste to Editor"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.copy",
+                "key": "ctrl+c",
+                "mac": "cmd+c",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.cut",
+                "key": "ctrl+x",
+                "mac": "cmd+x",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.paste",
+                "key": "ctrl+v",
+                "mac": "cmd+v",
+                "when": "editorTextFocus"
             }
         ]
     },
