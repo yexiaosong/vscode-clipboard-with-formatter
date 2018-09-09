@@ -22,7 +22,8 @@
     "activationEvents": [
         "onCommand:extension.copy",
         "onCommand:extension.cut",
-        "onCommand:extension.paste"
+        "onCommand:extension.paste",
+        "onCommand:extension.clipboardHistory"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -38,6 +39,10 @@
             {
                 "command": "extension.paste",
                 "title": "Paste to Editor"
+            },
+            {
+                "command": "extension.clipboardHistory",
+                "title": "show clipboard history"
             }
         ],
         "keybindings": [
@@ -57,6 +62,12 @@
                 "command": "extension.paste",
                 "key": "ctrl+v",
                 "mac": "cmd+v",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.clipboardHistory",
+                "key": "ctrl+shift+r",
+                "mac": "cmd+shift+r",
                 "when": "editorTextFocus"
             }
         ]
