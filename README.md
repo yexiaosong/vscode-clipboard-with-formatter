@@ -8,5 +8,7 @@ As we can see on VSCode marketplace, there are some extensions on clipboard. But
 If we try to rewrite some project, several past variables & class & function were useful. After we copied them, the details about them
 became mistery. That's why I code this.
 
+## Notice
+This project is just beginning, so the features are just demo-like. You can download for testing instead of working.
 
 **Enjoy!**
