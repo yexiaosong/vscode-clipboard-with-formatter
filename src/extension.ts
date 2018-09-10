@@ -1,10 +1,11 @@
 'use strict';
 import { commands, window, Range, Position, workspace, TextEditor, ExtensionContext } from 'vscode';
+import { format } from './utils/formatter';
 let config = workspace.getConfiguration('clipboard');
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: ExtensionContext) {
-
     let clipboardHistory: Array<any> = [];
 
     function addToClipboard(editor: TextEditor) {
@@ -54,9 +55,15 @@ export function activate(context: ExtensionContext) {
         if(!clipboardHistory.length){
             window.showInformationMessage('当前剪贴板内容为空');
         }
-        window.showQuickPick(clipboardHistory).then(item => {
-            pasteSelected(item);
+        const languageId = window.activeTextEditor.document.languageId;
+        const formatContent = format(languageId);
+        const formateedItem = clipboardHistory.map(item => formatContent(item));
+        Promise.resolve(formateedItem).then(r => {
+            window.showQuickPick(r).then(item => {
+                pasteSelected(item);
+            });
         });
+        
     });
 
     context.subscriptions.concat([copy, cut, paste, showClipboardHistory]);
