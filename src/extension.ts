@@ -1,12 +1,13 @@
 'use strict';
 import { commands, window, Range, Position, workspace, TextEditor, ExtensionContext } from 'vscode';
 import { format } from './utils/formatter';
-let config = workspace.getConfiguration('clipboard');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: ExtensionContext) {
     let clipboardHistory: Array<any> = [];
+    let config = workspace.getConfiguration('clipboardFormatter');
+    const _maxLength = config.maxLength;
 
     function addToClipboard(editor: TextEditor) {
         const selections = editor.selections;
@@ -24,6 +25,9 @@ export function activate(context: ExtensionContext) {
             selectedContent = document.getText(new Range(lineStart, lineEnd));
             if(clipboardHistory.indexOf(selectedContent) === -1) {
                 clipboardHistory.push(selectedContent);
+                if (clipboardHistory.length > _maxLength) {
+                    clipboardHistory.shift();
+                }
             }
         });
     }

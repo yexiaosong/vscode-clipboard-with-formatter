@@ -27,6 +27,18 @@
     ],
     "main": "./out/extension",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Clipboard with formatter",
+            "properties": {
+                "clipboardFormatter.maxLength": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "default": 10,
+                    "description": "Maximum clipboard-history-items"
+                }
+            }
+        },
         "commands": [
             {
                 "command": "extension.copy",

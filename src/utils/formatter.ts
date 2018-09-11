@@ -11,9 +11,9 @@ function format(languageId: string) {
                 return matcher(jsMatcher, params);
             };
         default:
-        return function(params) {
-            return params;
-        };
+            return function(params) {
+                return params;
+            };
     }
     
 }
