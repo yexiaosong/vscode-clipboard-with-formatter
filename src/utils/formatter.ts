@@ -1,17 +1,20 @@
-import { funReg } from './languages/javascript';
+import jsMatcher from './languages/javascript';
 function format(languageId: string) {
-    let _funReg: RegExp;
-    return function (params: string) {
-        switch(languageId)
-        {
-            case 'javascript':
-                _funReg = funReg;
-                break;
-            default:
-                _funReg = funReg;
-        }
-        return params.replace(_funReg, 'function $1');
-    };
+    function matcher(type, params) {
+        const formatter = type.find(item => item.reg.test(params) === true);
+        return formatter ? params.replace(formatter.reg, formatter.content) : params;
+    }
+    switch(languageId)
+    {
+        case 'javascript':
+            return function(params) {
+                return matcher(jsMatcher, params);
+            };
+        default:
+        return function(params) {
+            return params;
+        };
+    }
     
 }
 
