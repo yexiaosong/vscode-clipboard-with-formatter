@@ -2,7 +2,7 @@
     "name": "vscode-clipboard-with-formatter",
     "displayName": "clipboard with formatter",
     "description": "Optimize your copy and paste.Keep a history of your copied items and re-paste if needed, at the same time, it can format your code segment.",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "yexiaosong",
     "icon": "imgs/logo.png",
     "bugs": {
@@ -23,7 +23,8 @@
         "onCommand:extension.copy",
         "onCommand:extension.cut",
         "onCommand:extension.paste",
-        "onCommand:extension.clipboardHistory"
+        "onCommand:extension.showClipboardHistory",
+        "onCommand:extension.deleteClipboardHistory"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -53,8 +54,12 @@
                 "title": "Paste to Editor"
             },
             {
-                "command": "extension.clipboardHistory",
+                "command": "extension.showClipboardHistory",
                 "title": "show clipboard history"
+            },
+            {
+                "command": "extension.deleteClipboardHistory",
+                "title": "delete clipboard history"
             }
         ],
         "keybindings": [
@@ -77,9 +82,15 @@
                 "when": "editorTextFocus"
             },
             {
-                "command": "extension.clipboardHistory",
+                "command": "extension.showClipboardHistory",
                 "key": "ctrl+shift+r",
                 "mac": "cmd+shift+r",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.deleteClipboardHistory",
+                "key": "ctrl+shift+v",
+                "mac": "cmd+shift+v",
                 "when": "editorTextFocus"
             }
         ]

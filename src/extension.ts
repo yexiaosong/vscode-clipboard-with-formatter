@@ -41,21 +41,7 @@ export function activate(context: ExtensionContext) {
         }
     }
 
-    const copy = commands.registerCommand('extension.copy', () => {
-        addToClipboard(window.activeTextEditor);
-        commands.executeCommand("editor.action.clipboardCopyAction");
-    });
-
-    const cut = commands.registerCommand('extension.cut', () => {
-        window.showInformationMessage('extension.cut');
-        commands.executeCommand("editor.action.clipboardCutAction");
-    });
-
-    const paste = commands.registerCommand('extension.paste', () => {
-        commands.executeCommand("editor.action.clipboardPasteAction");
-    });
-
-    const showClipboardHistory = commands.registerCommand('extension.clipboardHistory', () => {
+    function handleClipboardHistory(cb) {
         if(!clipboardHistory.length){
             window.showInformationMessage('当前剪贴板内容为空');
         }
@@ -64,11 +50,39 @@ export function activate(context: ExtensionContext) {
         const formateedItems = clipboardHistory.map(item => formatContent(item));
         window.showQuickPick(formateedItems).then(item => {
             const index = formateedItems.findIndex(formateedItem => formateedItem === item);
-            pasteSelected(clipboardHistory[index]);
+            cb(index);
         });
+    }
+
+    const copy = commands.registerCommand('extension.copy', () => {
+        addToClipboard(window.activeTextEditor);
+        commands.executeCommand("editor.action.clipboardCopyAction");
     });
 
-    context.subscriptions.concat([copy, cut, paste, showClipboardHistory]);
+    const cut = commands.registerCommand('extension.cut', () => {
+        addToClipboard(window.activeTextEditor);
+        commands.executeCommand("editor.action.clipboardCutAction");
+    });
+
+    const paste = commands.registerCommand('extension.paste', () => {
+        commands.executeCommand("editor.action.clipboardPasteAction");
+    });
+
+    const showClipboardHistory = commands.registerCommand('extension.showClipboardHistory', () => {
+        handleClipboardHistory(index => pasteSelected(clipboardHistory[index]));
+    });
+
+    const deleteClipboardHistory = commands.registerCommand('extension.deleteClipboardHistory', () => {
+        handleClipboardHistory(index => clipboardHistory.splice(index, 1));
+    });
+
+    context.subscriptions.concat([
+        copy,
+        cut,
+        paste,
+        showClipboardHistory,
+        deleteClipboardHistory
+    ]);
 }
 
 // this method is called when your extension is deactivated
