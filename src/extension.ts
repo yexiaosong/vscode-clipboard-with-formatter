@@ -61,13 +61,11 @@ export function activate(context: ExtensionContext) {
         }
         const languageId = window.activeTextEditor.document.languageId;
         const formatContent = format(languageId);
-        const formateedItem = clipboardHistory.map(item => formatContent(item));
-        Promise.resolve(formateedItem).then(r => {
-            window.showQuickPick(r).then(item => {
-                pasteSelected(item);
-            });
+        const formateedItems = clipboardHistory.map(item => formatContent(item));
+        window.showQuickPick(formateedItems).then(item => {
+            const index = formateedItems.findIndex(formateedItem => formateedItem === item);
+            pasteSelected(clipboardHistory[index]);
         });
-        
     });
 
     context.subscriptions.concat([copy, cut, paste, showClipboardHistory]);
