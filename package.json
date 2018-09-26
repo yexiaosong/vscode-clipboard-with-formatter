@@ -2,7 +2,7 @@
     "name": "vscode-clipboard-with-formatter",
     "displayName": "clipboard with formatter",
     "description": "Optimize your copy and paste.Keep a history of your copied items and re-paste if needed, at the same time, it can format your code segment.",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "yexiaosong",
     "icon": "imgs/logo.png",
     "bugs": {

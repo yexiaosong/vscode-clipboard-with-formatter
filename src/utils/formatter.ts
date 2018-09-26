@@ -10,6 +10,17 @@ function format(languageId: string) {
             return function(params) {
                 return matcher(jsMatcher, params);
             };
+
+        case 'javascriptreact':
+            return function(params) {
+                return matcher(jsMatcher, params);
+            };
+        
+        case 'typescript':
+            return function(params) {
+                return matcher(jsMatcher, params);
+            };
+
         default:
             return function(params) {
                 return params;

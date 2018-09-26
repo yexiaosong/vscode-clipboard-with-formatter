@@ -1,7 +1,6 @@
 # Change Log
-All notable changes to the "vscode-clipboard-with-formatter" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
-- Initial release
+### Changed
+- update more languageId support, such as react, typescript
+- add Block match function
